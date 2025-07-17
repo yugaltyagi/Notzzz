@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Basic -->
+    <color name="black">#000000</color> <!-- Black -->
+    <color name="white">#FFFFFF</color> <!-- White -->
+
+    <!-- Red Family -->
+    <color name="cherry_red">#F44336</color> <!-- Cherry Red -->
+    <color name="crimson">#DC143C</color> <!-- Crimson -->
+    <color name="tomato_red">#FF6347</color> <!-- Tomato -->
+    <color name="firebrick_red">#B22222</color> <!-- Firebrick -->
+    <color name="light_coral">#F08080</color> <!-- Light Coral -->
+
+    <!-- Pink Family -->
+    <color name="hot_pink">#FF69B4</color> <!-- Hot Pink -->
+    <color name="deep_pink">#FF1493</color> <!-- Deep Pink -->
+    <color name="light_pink">#FFB6C1</color> <!-- Light Pink -->
+    <color name="pastel_pink">#FFD1DC</color> <!-- Pastel Pink -->
+
+    <!-- Purple Family -->
+    <color name="indigo">#4B0082</color> <!-- Indigo -->
+    <color name="lavender">#E6E6FA</color> <!-- Lavender -->
+    <color name="violet">#8F00FF</color> <!-- Violet -->
+    <color name="orchid">#DA70D6</color> <!-- Orchid -->
+    <color name="amethyst">#9966CC</color> <!-- Amethyst -->
+
+    <!-- Blue Family -->
+    <color name="sky_blue">#87CEEB</color> <!-- Sky Blue -->
+    <color name="dodger_blue">#1E90FF</color> <!-- Dodger Blue -->
+    <color name="steel_blue">#4682B4</color> <!-- Steel Blue -->
+    <color name="navy_blue">#000080</color> <!-- Navy -->
+    <color name="baby_blue">#BFEFFF</color> <!-- Baby Blue -->
+
+    <!-- Cyan & Teal -->
+    <color name="aqua">#00FFFF</color> <!-- Aqua -->
+    <color name="turquoise">#40E0D0</color> <!-- Turquoise -->
+    <color name="teal">#008080</color> <!-- Teal -->
+    <color name="light_cyan">#E0FFFF</color> <!-- Light Cyan -->
+
+    <!-- Green Family -->
+    <color name="forest_green">#228B22</color> <!-- Forest Green -->
+    <color name="lime_green">#32CD32</color> <!-- Lime Green -->
+    <color name="mint_green">#98FF98</color> <!-- Mint Green -->
+    <color name="olive_green">#6B8E23</color> <!-- Olive Green -->
+    <color name="sea_green">#2E8B57</color> <!-- Sea Green -->
+
+    <!-- Yellow Family -->
+    <color name="lemon_yellow">#FFF44F</color> <!-- Lemon Yellow -->
+    <color name="goldenrod">#DAA520</color> <!-- Goldenrod -->
+    <color name="mustard_yellow">#FFDB58</color> <!-- Mustard -->
+    <color name="light_yellow">#FFFFE0</color> <!-- Light Yellow -->
+
+    <!-- Orange Family -->
+    <color name="sunset_orange">#FD5E53</color> <!-- Sunset Orange -->
+    <color name="coral">#FF7F50</color> <!-- Coral -->
+    <color name="dark_orange">#FF8C00</color> <!-- Dark Orange -->
+    <color name="peach">#FFE5B4</color> <!-- Peach -->
+
+    <!-- Brown & Earth Tones -->
+
+    <color name="saddle_brown">#8B4513</color> <!-- Saddle Brown -->
+    <color name="chocolate">#D2691E</color> <!-- Chocolate -->
+    <color name="sienna">#A0522D</color> <!-- Sienna -->
+    <color name="tan">#D2B48C</color> <!-- Tan -->
+
+    <!-- Gray Family -->
+    <color name="light_gray">#D3D3D3</color> <!-- Light Gray -->
+    <color name="silver">#C0C0C0</color> <!-- Silver -->
+    <color name="slate_gray">#708090</color> <!-- Slate Gray -->
+    <color name="dim_gray">#696969</color> <!-- Dim Gray -->
+    <color name="charcoal_gray">#36454F</color> <!-- Charcoal Gray -->
+
+    <!-- Others -->
+    <color name="beige">#F5F5DC</color> <!-- Beige -->
+    <color name="ivory">#FFFFF0</color> <!-- Ivory -->
+    <color name="snow">#FFFAFA</color> <!-- Snow -->
+    <color name="azure">#F0FFFF</color> <!-- Azure -->
+
+
+</resources>

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "883995345591",
+    "project_id": "notzzz-dcad2",
+    "storage_bucket": "notzzz-dcad2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883995345591:android:c9fbe01d613bc435d88332",
+        "android_client_info": {
+          "package_name": "com.example.notzzz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCGh3hqnadU1QEFPqQMfxMldkFF4bmRD-k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
