@@ -9,23 +9,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
-    private EditText mloginemail, mloginpassword;
-    private Button mlogin_button, msignup_button;
-    private TextView mforgotpassword;
-
-    private FirebaseAuth firebaseauth;
-    ProgressBar mprogreebarofmainactivity;
+    private EditText mLoginEmail, mLoginPassword;
+    private Button mLoginButton, mSignupButton;
+    private TextView mForgotPassword;
+    private ProgressBar mProgressBar;
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,71 +28,69 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        // Hide the action bar if it exists
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
-        mprogreebarofmainactivity = findViewById(R.id.progreebarofmainactivity);
 
-        mloginemail     = findViewById(R.id.loginemail);
-        mloginpassword  = findViewById(R.id.loginpassword);
-        mlogin_button   = findViewById(R.id.login_button);
-        msignup_button  = findViewById(R.id.signup_button);
-        mforgotpassword = findViewById(R.id.forgotpassword);
+        // Initialize UI components
+        mProgressBar = findViewById(R.id.progreebarofmainactivity);
+        mLoginEmail = findViewById(R.id.loginemail);
+        mLoginPassword = findViewById(R.id.loginpassword);
+        mLoginButton = findViewById(R.id.login_button);
+        mSignupButton = findViewById(R.id.signup_button);
+        mForgotPassword = findViewById(R.id.forgotpassword);
 
-        firebaseauth = FirebaseAuth.getInstance();
+        mFirebaseAuth = FirebaseAuth.getInstance();
 
-
-
-        // Redirect if already logged in and verified
-        FirebaseUser firebaseUser = firebaseauth.getCurrentUser();
-        if (firebaseUser != null && firebaseUser.isEmailVerified()) {
-            finish();
+        // Redirect if already logged in and email is verified
+        FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+        if (currentUser != null && currentUser.isEmailVerified()) {
             startActivity(new Intent(MainActivity.this, notes_Activity.class));
+            finish();
         }
 
-        msignup_button.setOnClickListener(v ->
+        // Set up click listeners
+        mSignupButton.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, Signup.class)));
 
-        mforgotpassword.setOnClickListener(v ->
+        mForgotPassword.setOnClickListener(v ->
                 startActivity(new Intent(MainActivity.this, Forgotpassword.class)));
 
-        mlogin_button.setOnClickListener(v -> attemptLogin());
+        mLoginButton.setOnClickListener(v -> attemptLogin());
     }
 
     private void attemptLogin() {
-        String email = mloginemail.getText().toString().trim();
-        String password = mloginpassword.getText().toString().trim();
+        String email = mLoginEmail.getText().toString().trim();
+        String password = mLoginPassword.getText().toString().trim();
 
         if (email.isEmpty() || password.isEmpty()) {
             Toast.makeText(this, "All fields are required.", Toast.LENGTH_SHORT).show();
             return;
-        } else {
-            mprogreebarofmainactivity.setVisibility(ProgressBar.VISIBLE);
-
-
-            firebaseauth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
-                        if (task.isSuccessful()) {
-                            checkMailVerification();
-                        } else {
-                            Toast.makeText(MainActivity.this, "Account doesn't exist or wrong credentials!", Toast.LENGTH_SHORT).show();
-                            mprogreebarofmainactivity.setVisibility(ProgressBar.INVISIBLE);
-                        }
-                    });
         }
+
+        mProgressBar.setVisibility(ProgressBar.VISIBLE);
+
+        mFirebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+                    mProgressBar.setVisibility(ProgressBar.INVISIBLE);
+                    if (task.isSuccessful()) {
+                        checkEmailVerification();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Invalid credentials or account doesn't exist.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
-    private void checkMailVerification() {
-        FirebaseUser firebaseUser = firebaseauth.getCurrentUser();
-
+    private void checkEmailVerification() {
+        FirebaseUser firebaseUser = mFirebaseAuth.getCurrentUser();
         if (firebaseUser != null && firebaseUser.isEmailVerified()) {
             Toast.makeText(this, "Logged in successfully.", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, notes_Activity.class));
             finish();
         } else {
-            mprogreebarofmainactivity.setVisibility(ProgressBar.INVISIBLE);
             Toast.makeText(this, "Please verify your email first.", Toast.LENGTH_SHORT).show();
-            firebaseauth.signOut();
+            mFirebaseAuth.signOut();
         }
     }
 }

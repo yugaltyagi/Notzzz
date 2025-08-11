@@ -2,6 +2,7 @@ package com.example.notzzz;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -25,8 +26,8 @@ import java.util.Map;
 
 public class CreateNote extends AppCompatActivity {
 
-    ProgressBar mprogreebarofcreatenote;
-
+    private static final String TAG = "CreateNote"; // For logging
+    private ProgressBar mprogreebarofcreatenote;
     private EditText mTitleOfNote, mContentOfNote;
     private FloatingActionButton mSaveNote;
     private FirebaseAuth firebaseAuth;
@@ -67,53 +68,65 @@ public class CreateNote extends AppCompatActivity {
                 if (title.isEmpty() || content.isEmpty()) {
                     Toast.makeText(CreateNote.this, "Both fields are required", Toast.LENGTH_SHORT).show();
                     return;
-                }else {
-
-                    mprogreebarofcreatenote.setVisibility(View.VISIBLE);
-
-                    // Create document reference and save data
-                    DocumentReference documentReference = firebaseFirestore.collection("notes")
-                            .document(firebaseUser.getUid())
-                            .collection("myNotes")
-                            .document();
-
-                    Map<String, Object> note = new HashMap<>();
-                    note.put("title", title);
-                    note.put("content", content);
-
-                    documentReference.set(note)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void unused) {
-                                    Toast.makeText(CreateNote.this, "Note created successfully", Toast.LENGTH_SHORT).show();
-                                    mprogreebarofcreatenote.setVisibility(View.INVISIBLE);
-                                    startActivity(new Intent(CreateNote.this, notes_Activity.class));
-                                    finish(); // Optional: remove this activity from the back stack
-                                }
-                            })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(CreateNote.this, "Failed to create note", Toast.LENGTH_SHORT).show();
-                                    mprogreebarofcreatenote.setVisibility(View.INVISIBLE);
-
-                                }
-                            });
                 }
+
+                if (firebaseUser == null) {
+                    Toast.makeText(CreateNote.this, "User not authenticated", Toast.LENGTH_SHORT).show();
+                    mprogreebarofcreatenote.setVisibility(View.INVISIBLE);
+                    return;
+                }
+
+                mprogreebarofcreatenote.setVisibility(View.VISIBLE);
+
+                // Create document reference and save data
+                DocumentReference documentReference = firebaseFirestore.collection("notes")
+                        .document(firebaseUser.getUid())
+                        .collection("myNotes")
+                        .document();
+
+                Map<String, Object> note = new HashMap<>();
+                note.put("title", title);
+                note.put("content", content);
+
+                documentReference.set(note)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(CreateNote.this, "Note created successfully", Toast.LENGTH_SHORT).show();
+                                mprogreebarofcreatenote.setVisibility(View.INVISIBLE);
+                                Intent intent = new Intent(CreateNote.this, notes_Activity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                                startActivity(intent);
+//                                finish(); // Remove this activity from the back stack
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(CreateNote.this, "Failed to create note: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                mprogreebarofcreatenote.setVisibility(View.INVISIBLE);
+                                Log.e(TAG, "Failed to save note", e);
+                            }
+                        });
             }
         });
     }
-
 
     // Handle toolbar back button
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            getOnBackPressedDispatcher().onBackPressed();
+            Log.d(TAG, "Toolbar back button pressed");
+            finish(); // Close the activity
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
+    // Handle system back button
+    @Override
+    public void onBackPressed() {
+        Log.d(TAG, "System back button pressed");
+        super.onBackPressed(); // Calls finish() by default
+    }
 }
