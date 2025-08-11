@@ -5,13 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ivory"
     tools:context=".notedetails">
 
-    <androidx.appcompat.widget.Toolbar
+    <!-- Enhanced Material Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarofnotedetails"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
+        android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -20,39 +23,65 @@
             android:id="@+id/titelofnotedetail"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:paddingTop="12dp"
             android:textSize="25sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:background="@android:color/transparent" />
-    </androidx.appcompat.widget.Toolbar>
+            android:textColor="@color/charcoal_gray"
+            android:background="@android:color/transparent"
+            android:ellipsize="end"
+            android:maxLines="1" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
-    <TextView
-        android:id="@+id/contentofnotedetail"
-        android:layout_width="match_parent"
+    <!-- Content TextView with improved styling -->
+    <ScrollView
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="4dp"
-        android:background="#782196F3"
-        android:gravity="top|start"
-        android:hint="Enter your note content"
-        android:padding="15dp"
-        android:textColor="@color/black"
-        android:textSize="15sp"
+        android:layout_marginBottom="16dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/toolbarofnotedetails"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/gotoeditnote"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <TextView
+            android:id="@+id/contentofnotedetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/note_detail_background"
+            android:gravity="start"
+            android:lineSpacingExtra="4sp"
+            android:padding="20dp"
+            android:textColor="@color/charcoal_gray"
+            android:textSize="16sp" />
+    </ScrollView>
+
+    <!-- Enhanced FAB with better styling -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/gotoeditnote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/edit_svgrepo_com"
-        app:maxImageSize="45dp"
+        android:layout_margin="24dp"
+        android:contentDescription="Edit note"
+        app:backgroundTint="@color/dodger_blue"
+        app:rippleColor="@color/steel_blue"
+        app:srcCompat="@drawable/edit_svgrepo_com"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:elevation="8dp"
+        app:fabSize="normal" />
+
+    <!-- Subtle shadow divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/toolbar_shadow"
+        app:layout_constraintTop_toBottomOf="@id/toolbarofnotedetails"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

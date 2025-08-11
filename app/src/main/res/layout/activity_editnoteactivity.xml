@@ -5,13 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/ivory"
     tools:context=".editnoteactivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <!-- Enhanced Material Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbarofeditnote"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white"
+        android:elevation="4dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -20,38 +23,66 @@
             android:id="@+id/edittitleofnote"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:paddingTop="12dp"
-            android:textSize="20sp"
+            android:textSize="22sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
-            android:background="@android:color/transparent" />
-    </androidx.appcompat.widget.Toolbar>
+            android:textColor="@color/charcoal_gray"
+            android:textColorHint="@color/slate_gray"
+            android:hint="Edit note title"
+            android:background="@android:color/transparent"
+            android:imeOptions="actionNext"
+            android:inputType="textCapSentences"
+            android:maxLines="1" />
+    </com.google.android.material.appbar.MaterialToolbar>
 
+    <!-- Content EditText with improved styling -->
     <EditText
         android:id="@+id/editcontentofnote"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
-        android:background="#782196F3"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/edit_note_background"
         android:gravity="top|start"
-        android:textColor="@color/black"
-        android:textSize="15sp"
-        android:padding="15dp"
+        android:hint="Edit your note content..."
+        android:textColor="@color/charcoal_gray"
+        android:textColorHint="@color/slate_gray"
+        android:textSize="16sp"
+        android:lineSpacingExtra="4sp"
+        android:padding="20dp"
+        android:minHeight="200dp"
+        android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@id/toolbarofeditnote"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/saveeditnote"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Enhanced FAB with better styling -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/saveeditnote"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/saveeditnote"
+        android:layout_margin="24dp"
+        android:contentDescription="Save edited note"
+        app:backgroundTint="@color/cherry_red"
+        app:rippleColor="@color/crimson"
+        app:srcCompat="@drawable/upload"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginRight="30dp"
-        android:layout_marginBottom="30dp"
-        android:src="@drawable/upload"
-        app:maxImageSize="45dp"
-        android:background="#D32323"/>
+        app:elevation="8dp"
+        app:fabSize="normal" />
+
+    <!-- Optional shadow divider -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/toolbar_shadow"
+        app:layout_constraintTop_toBottomOf="@id/toolbarofeditnote"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

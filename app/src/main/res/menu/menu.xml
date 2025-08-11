@@ -4,6 +4,7 @@
 
     <item
         android:id="@+id/Logout"
-        android:title="Logout"/>
+        android:title="Logout"
+        android:icon="@drawable/outline_exit_to_app_24"/>
 
 </menu>
